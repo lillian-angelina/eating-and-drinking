@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Restaurants;
 use App\Models\User;
 
-class Reservations extends Model
+class Reservation extends Model
 {
     protected $fillable = [
         'restaurant_id',

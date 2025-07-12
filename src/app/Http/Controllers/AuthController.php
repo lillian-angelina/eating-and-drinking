@@ -42,9 +42,7 @@ class AuthController extends Controller
             return redirect()->intended('/');
         }
 
-        return redirect()->back()->withErrors([
-            'login_error' => 'ログイン情報が登録されていません。',
-        ]);
+        return view('auth.login');
     }
 
     public function logout(Request $request)
