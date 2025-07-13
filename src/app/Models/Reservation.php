@@ -17,17 +17,16 @@ class Reservation extends Model
         'status',
     ];
 
-    /**
-     * Get the restaurant that owns the reservation.
-     */
     public function restaurant()
     {
-        return $this->belongsTo(Restaurants::class);
+        return $this->belongsTo(Restaurant::class);
     }
 
-    /**
-     * Get the user that owns the reservation.
-     */
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

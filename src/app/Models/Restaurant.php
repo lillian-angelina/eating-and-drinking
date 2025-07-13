@@ -2,22 +2,28 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Reservations;
+use App\Models\Reservation;
 
 class Restaurant extends Model
 {
-        protected $fillable = [
+    use HasFactory;
+
+    protected $fillable = [
         'name',
+        'area',
+        'genre',
         'image_url',
-        'description',
     ];
 
-    /**
-     * Get the reservations for the restaurant.
-     */
+    public function likes()
+    {
+        return $this->belongsToMany(Restaurant::class, 'likes')->withTimestamps();
+    }
+
     public function reservations()
     {
-        return $this->hasMany(Reservations::class);
+        return $this->hasMany(Reservation::class);
     }
 }

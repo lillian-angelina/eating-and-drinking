@@ -6,7 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Reservations;
+use App\Models\Reservation;
 
 class User extends Authenticatable
 {
@@ -49,6 +49,11 @@ class User extends Authenticatable
 
     public function reservations()
     {
-        return $this->belongsTo(Reservations::class);
+        return $this->hasMany(Reservation::class);
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Restaurant::class, 'likes')->withTimestamps();
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    <title>Home</title>
+    <title>店舗一覧</title>
 @endsection
 
 @section('search')
@@ -13,25 +13,19 @@
 @endsection
 
 @section('content')
-    <div class="store-list">
-        @forelse ($restaurants as $restaurant)
-            <div class="card">
-                <a href="{{ url('/resturant/' . $restaurant->id) }}">
-                    @if ($restaurant->image_url)
-                        <img class="card-image" src="{{ asset('storage/' . $restaurant->image_url) }}"
-                            alt="{{ $restaurant->name }}">
-                    @else
-                        <div class="card-image">商品画像</div>
-                    @endif
-                </a>
-                <div class="card-body">
-                    <a href="{{ url('/restaurant/' . $restaurant->id) }}">
-                        <p class="card-title">{{ $restaurant->name }}</p>
-                    </a>
+    <div class="restaurant-list">
+        <div class="grid">
+            @foreach ($restaurants as $restaurant)
+                <div class="card">
+                    <img src="{{ asset($restaurant->image_url) }}" alt="{{ $restaurant->name }}">
+                    <div class="card-body">
+                        <h3>{{ $restaurant->name }}</h3>
+                        <p>#{{ $restaurant->area }} #{{ $restaurant->genre }}</p>
+                        <a href="#" class="btn">詳しくみる</a>
+                        <span class="heart">♡</span> {{-- 実装後はお気に入り機能 --}}
+                    </div>
                 </div>
-            </div>
-        @empty
-            <p>いいねした商品がありません。</p>
-        @endforelse
+            @endforeach
+        </div>
     </div>
 @endsection

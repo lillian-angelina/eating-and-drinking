@@ -5,16 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Restaurant;
+use App\Models\Reservation;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        if (auth()->check()) {
-            return redirect()->route('mypage.index');
-        }
-
-        $restaurants = Restaurant::all(); // または必要な検索/絞り込み処理
+        $restaurants = Restaurant::all();
         return view('index', compact('restaurants'));
     }
 
@@ -25,20 +23,30 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-            'description' => 'nullable|string',
+        $validated = $request->validate([
+            'restaurant_id' => 'required|exists:restaurants,id',
+            'date' => 'required|date',
+            'time' => 'required',
+            'number' => 'required|integer|min:1',
         ]);
 
-        // Product creation logic here
+        Reservation::create([
+            'user_id' => Auth::id(),
+            'restaurant_id' => $validated['restaurant_id'],
+            'date' => $validated['date'],
+            'time' => $validated['time'],
+            'number' => $validated['number'],
+        ]);
 
-        return redirect()->route('products.index')->with('success', 'Product created successfully.');
+        return redirect()->route('mypage')->with('message', '予約を保存しました');
     }
 
     public function show($id)
     {
-        // Fetch product by ID and return view
+        $restaurant = Restaurant::findOrFail($id);
+        $isFavorited = Auth::check() && Auth::user()->favorites()->where('restaurant_id', $id)->exists();
+
+        return view('products.show', compact('products', 'isFavorited'));
     }
 
     public function search(Request $request)

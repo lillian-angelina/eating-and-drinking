@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,14 +12,14 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('restaurant_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->date('reserved_date');
-            $table->time('reserved_time');
-            $table->integer('number_of_people');
-            $table->string('status')->nullable();
+            $table->foreignId('restaurant_id')->constrained()->onDelete('cascade');
+            $table->date('date');
+            $table->time('time');
+            $table->integer('number');
             $table->timestamps();
         });
+
     }
 
     /**

@@ -14,12 +14,10 @@
 <body>
     <header class="header">
         <div class="header_logo">
-            <a href="{{ url('/auth/login') }}" class="logo">Rese</a>
+            <a href="{{ url('/components/menu') }}" class="logo"><img src="{{ asset('images/detail.png') }}">Rese</a>
         </div>
 
-        @auth
-            @yield('search')
-        @endauth
+        @yield('search')
 
     </header>
 

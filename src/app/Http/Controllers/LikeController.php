@@ -2,30 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Like;
 use App\Models\Restaurant;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
-    public function toggle(Request $request, Restaurant $restaurant)
+    public function toggle(Restaurant $restaurant)
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
-        $like = Like::where('user_id', $user->id)
-            ->where('restaurant_id', $restaurant->id)
-            ->first();
-
-        if ($like) {
-            $like->delete();
+        if ($user->likes()->where('restaurant_id', $restaurant->id)->exists()) {
+            $user->likes()->detach($restaurant->id);
         } else {
-            Like::create([
-                'user_id' => $user->id,
-                'restaurant_id' => $restaurant->id,
-            ]);
+            $user->likes()->attach($restaurant->id);
         }
 
-        return redirect()->back();
+        return back();
     }
-
 }
