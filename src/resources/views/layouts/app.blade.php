@@ -14,7 +14,7 @@
 <body>
     <header class="header">
         <div class="header_logo">
-            <a href="{{ url('/components/menu') }}" class="logo"><img src="{{ asset('images/detail.png') }}">Rese</a>
+            <a href="{{ url('/components/menu') }}" class="logo"><img src="{{ asset('images/detail.png') }}" class="logo-img">Rese</a>
         </div>
 
         @yield('search')

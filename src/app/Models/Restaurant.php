@@ -14,12 +14,12 @@ class Restaurant extends Model
         'name',
         'area',
         'genre',
-        'image_url',
+        'image_path',
     ];
 
-    public function likes()
+    public function likedUsers()
     {
-        return $this->belongsToMany(Restaurant::class, 'likes')->withTimestamps();
+        return $this->belongsToMany(User::class, 'likes')->withTimestamps();
     }
 
     public function reservations()

@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('area');
             $table->string('genre');
-            $table->string('image_url')->nullable();
+            $table->string('image_path')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });

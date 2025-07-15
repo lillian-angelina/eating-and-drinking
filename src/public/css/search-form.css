@@ -1,0 +1,36 @@
+.search-form {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+    background: white;
+}
+
+.form-group select,
+.form-group input {
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+}
+
+.form-group select {
+    padding: 0 10px;
+}
+
+.form-group input {
+    padding: 0 10px;
+    width: 300px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.line {
+    height: 25px;
+    padding: 0 5px;
+    color: bisque;
+    background: white;
+}

@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
 use App\Models\Restaurant;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::all()->map(function ($restaurant) {
+            $restaurant->display_area = $this->convertArea($restaurant->area);
+            $restaurant->display_genre = $this->convertGenre($restaurant->genre);
+            return $restaurant;
+        });
         return view('index', compact('restaurants'));
     }
 
@@ -46,28 +50,54 @@ class ProductController extends Controller
         $restaurant = Restaurant::findOrFail($id);
         $isFavorited = Auth::check() && Auth::user()->favorites()->where('restaurant_id', $id)->exists();
 
-        return view('products.show', compact('products', 'isFavorited'));
+        return view('products.show', compact('restaurant', 'isFavorited'));
     }
 
     public function search(Request $request)
     {
-        $query = Product::query();
+        $query = Restaurant::query();
 
         if ($request->filled('area')) {
-            $query->where('area', $request->area);
+            $query->where('area', $request->input('area'));
         }
 
         if ($request->filled('genre')) {
-            $query->where('genre', $request->genre);
+            $query->where('genre', $request->input('genre'));
         }
 
         if ($request->filled('query')) {
-            $query->where('name', 'like', '%' . $request->query . '%');
+            $query->where('name', 'like', '%' . $request->input('query') . '%');
         }
 
-        $products = $query->get();
+        $restaurants = $query->get()->map(function ($restaurant) {
+            $restaurant->display_area = $this->convertArea($restaurant->area);
+            $restaurant->display_genre = $this->convertGenre($restaurant->genre);
+            return $restaurant;
+        });
 
-        return view('index', compact('products'));
+        return view('index', compact('restaurants'));
+    }
+
+    private function convertArea($area)
+    {
+        return match ($area) {
+            'tokyo' => '東京都',
+            'osaka' => '大阪府',
+            'hukuoka' => '福岡県',
+            default => $area,
+        };
+    }
+
+    private function convertGenre($genre)
+    {
+        return match ($genre) {
+            'sushi' => '寿司',
+            'yakiniku' => '焼肉',
+            'ramen' => 'ラーメン',
+            'izakaya' => '居酒屋',
+            'italian' => 'イタリアン',
+            default => $genre,
+        };
     }
 
     public function edit($id)
