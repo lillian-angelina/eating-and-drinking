@@ -9,12 +9,11 @@ use App\Models\User;
 class Reservation extends Model
 {
     protected $fillable = [
-        'restaurant_id',
         'user_id',
-        'reserved_date',
-        'reserved_time',
-        'number_of_people',
-        'status',
+        'restaurant_id',
+        'date',
+        'time',
+        'number',
     ];
 
     public function restaurant()

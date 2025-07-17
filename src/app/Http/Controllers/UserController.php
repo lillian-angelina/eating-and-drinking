@@ -11,7 +11,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $reservations = $user->reservations()->with('restaurant')->get();
-        $favorites = $user->favorites()->get();
+        $favorites = $user->likes()->get();
 
         return view('users.mypage', compact('user', 'reservations', 'favorites'));
     }

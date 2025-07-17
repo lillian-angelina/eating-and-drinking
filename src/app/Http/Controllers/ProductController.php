@@ -48,9 +48,9 @@ class ProductController extends Controller
     public function show($id)
     {
         $restaurant = Restaurant::findOrFail($id);
-        $isFavorited = Auth::check() && Auth::user()->favorites()->where('restaurant_id', $id)->exists();
+        $isFavorited = Auth::check() && Auth::user()->likes()->where('restaurant_id', $id)->exists();
 
-        return view('products.show', compact('restaurant', 'isFavorited'));
+        return view('restaurants.show', compact('restaurant', 'isFavorited'));
     }
 
     public function search(Request $request)

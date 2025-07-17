@@ -3,10 +3,18 @@
 <div class="content">
     <div class="exit" onclick="goBack()">×</div>
     <nav class="menu">
-        <ul>
+        <ul class="menu-list">
             @auth
                 <li><a href="{{ route('home') }}">Home</a></li>
-                <li><a href="{{ route('logout') }}">Logout</a></li>
+                <li><a href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
                 <li><a href="{{ route('mypage') }}">My Page</a></li>
             @else
                 <li><a href="{{ route('home') }}">Home</a></li>
@@ -21,7 +29,7 @@
         if (document.referrer !== "") {
             window.history.back();
         } else {
-            window.location.href = '/'; // ホームなど任意のURLに
+            window.location.href = '/';
         }
     }
 </script>

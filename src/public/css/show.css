@@ -1,0 +1,157 @@
+.restaurant-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.restaurant-detail .left-content {
+    width: 55%;
+    height: auto;
+}
+
+.restaurant-detail .right-content {
+    width: 40%;
+    height: auto;
+    background-color: #3366ff;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.right-content {
+    height: 730px;
+    transform: translate(7%, -13%);
+}
+
+.back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+    padding: 3px;
+    cursor: pointer;
+    margin: 0;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    transform: translate(7%, -90%);
+    font-size: 28px;
+    margin: 0;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.left-content p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.reservation-box h3 {
+    margin: 30px 30px;
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.reservation-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.reservation-box input,
+.reservation-box select {
+    margin: 0 30px;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+.form-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 66%;
+    background-color: #0055ff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-button button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: white;
+    background-color: #0055ff;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reservation-summary {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 15px;
+    margin: 20px 30px 0 30px;
+}
+
+.reservation-summary p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.shop {
+    display: flex;
+}
+
+.shop-name {
+    margin-right: 50px;
+}
+
+.shop-date {
+    margin-right: 54px;
+}
+
+.shop-time {
+    margin-right: 51px;
+}
+
+.shop-number {
+    margin-right: 28px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .restaurant-detail {
+        flex-direction: column;
+    }
+
+    .restaurant-detail .left-content,
+    .restaurant-detail .right-content {
+        width: 100%;
+    }
+
+    .right-content {
+        margin-top: 20px;
+    }
+}

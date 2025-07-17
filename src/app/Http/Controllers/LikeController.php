@@ -19,4 +19,17 @@ class LikeController extends Controller
 
         return back();
     }
+
+    public function like(Restaurant $restaurant)
+    {
+        $user = auth()->user();
+
+        if ($user->likes->contains($restaurant->id)) {
+            $user->likes()->detach($restaurant->id);
+        } else {
+            $user->likes()->attach($restaurant->id);
+        }
+
+        return back();
+    }
 }

@@ -26,4 +26,26 @@ class Restaurant extends Model
     {
         return $this->hasMany(Reservation::class);
     }
+
+    public function getDisplayAreaAttribute()
+    {
+        $areas = [
+            'tokyo' => '東京都',
+            'osaka' => '大阪府',
+            'fukuoka' => '福岡県',
+        ];
+        return $areas[$this->area] ?? $this->area;
+    }
+
+    public function getDisplayGenreAttribute()
+    {
+        $genres = [
+            'sushi' => '寿司',
+            'yakiniku' => '焼肉',
+            'ramen' => 'ラーメン',
+            'izakaya' => '居酒屋',
+            'italian' => 'イタリアン',
+        ];
+        return $genres[$this->genre] ?? $this->genre;
+    }
 }
