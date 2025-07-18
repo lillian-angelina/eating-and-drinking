@@ -110,8 +110,9 @@ class ProductController extends Controller
         // Update product logic here
     }
 
-    public function destroy($id)
+    public function destroy(Reservation $reservation)
     {
-        // Delete product logic here
+        $reservation->delete();
+        return redirect()->route('mypage')->with('success', '予約をキャンセルしました。');
     }
 }

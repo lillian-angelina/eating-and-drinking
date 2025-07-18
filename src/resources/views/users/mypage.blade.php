@@ -9,69 +9,55 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <h2>{{ $user->name }}さん</h2>
-        <div class="components">
-            <div class="component-1">
+    <div class="mypage-container">
+        <div class="mypage-content">
+            <div class="reservation-section">
                 <h3>予約状況</h3>
-            </div>
-            <div class="component-2">
-                <h3>お気に入り店舗</h3>
-            </div>
-        </div>
-        <div class="restaurant-detail">
-            <div class="left-content">
-                <h3>予約</h3>
                 @foreach($reservations as $reservation)
-                        <div class="reservation-card">
-                            <p class="shop-name">Shop</p>
-                            <p>{{ $reservation->restaurant->name }}</p>
+                    <div class="reservation-card">
+                        <div class="reservation-header">
+                            <span>予約{{ $loop->iteration }}</span>
+                            <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="close-btn">×</button>
+                            </form>
                         </div>
-                        <div class="reservation-card">
-                            <p class="shop-date">Date</p>
-                            <p>{{ $reservation->date }}</p>
-                        </div>
-                        <div class="reservation-card">
-                            <p class="shop-time">Time</p>
-                            <p>{{ $reservation->time }}</p>
-                        </div>
-                        <div class="reservation-card">
-                            <p class="shop-number">Number</p>
-                            <p>{{ $reservation->number }}人</p>
-                        </div>
+                        <p><strong class="shop-name">Shop</strong>{{ $reservation->restaurant->name }}</p>
+                        <p><strong class="shop-date">Date</strong>{{ $reservation->date }}</p>
+                        <p><strong class="shop-time">Time</strong>{{ $reservation->time }}</p>
+                        <p><strong class="shop-number">Number</strong>{{ $reservation->number }}人</p>
                     </div>
                 @endforeach
+            </div>
 
-
-            <div class="right-content">
-                <div class="favorites">
+            <div class="favorite-section">
+                <h2>{{ $user->name }}さん</h2>
+                <h3>お気に入り店舗</h3>
+                <div class="favorite-cards">
                     @foreach($favorites as $restaurant)
-                        <div class="card">
+                        <div class="favorite-card">
                             <img src="{{ asset($restaurant->image_path) }}" alt="{{ $restaurant->name }}">
                             <div class="card-body">
-                                <p class="card-body_name">{{ $restaurant->name }}</p>
-                                <p class="card-body_area-genre">#{{ $restaurant->display_area }}
-                                    #{{ $restaurant->display_genre }}</p>
-                                <p class="btn-a"><a href="{{ route('restaurants.show', $restaurant->id) }}"
-                                        class="btn">詳しくみる</a>
-                                </p>
+                                <p class="card-title">{{ $restaurant->name }}</p>
+                                <p class="card-tags">#{{ $restaurant->display_area }} #{{ $restaurant->display_genre }}</p>
+                                <a href="{{ route('restaurants.show', $restaurant->id) }}" class="btn">詳しくみる</a>
                                 <form action="{{ route('restaurants.like', $restaurant) }}" method="POST" class="like-form">
                                     @csrf
                                     @auth
-                                        @if (auth()->user()->likes->contains($restaurant->id))
-                                            <button type="submit" class="btn-submit" style="color: red;">♥</button>
-                                        @else
-                                            <button type="submit" class="btn-submit" style="color: #e9e9e9a8;">♥</button>
-                                        @endif
+                                        <button type="submit"
+                                            class="like-btn {{ auth()->user()->likes->contains($restaurant->id) ? 'liked' : '' }}">
+                                            ♥
+                                        </button>
                                     @else
-                                        <button type="button" class="btn-submit" style="color: #e9e9e9a8;"
-                                            onclick="alert('ログインしてください')">♥</button>
+                                        <button type="button" class="like-btn" onclick="alert('ログインしてください')">♥</button>
                                     @endauth
                                 </form>
                             </div>
+                        </div>
                     @endforeach
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
 @endsection

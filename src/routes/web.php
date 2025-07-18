@@ -17,6 +17,7 @@ Route::get('/restaurants/search', [ProductController::class, 'search'])->name('r
 Route::get('/restaurants/{restaurant}', [ProductController::class, 'show'])->name('restaurants.show');
 Route::post('/likes/{restaurant}', [LikeController::class, 'toggle'])->name('likes.toggle');
 Route::get('/mypage', [UserController::class, 'mypage'])->name('mypage');
+Route::delete('/reservations/{reservation}', [ProductController::class, 'destroy'])->name('reservations.destroy');
 Route::get('/components/menu', [UserController::class, 'menu'])->name('menu');
 
 Route::middleware('auth')->group(function () {
