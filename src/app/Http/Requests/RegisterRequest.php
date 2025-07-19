@@ -6,17 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterRequest extends FormRequest
 {
-    /**
-     * 認可（常に true に）
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * バリデーションルール
-     */
     public function rules(): array
     {
         return [
@@ -26,9 +20,6 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    /**
-     * カスタムメッセージ
-     */
     public function messages(): array
     {
         return [

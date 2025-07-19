@@ -100,11 +100,6 @@ class ProductController extends Controller
         };
     }
 
-    public function edit($id)
-    {
-        // Fetch product by ID and return edit view
-    }
-
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -115,7 +110,6 @@ class ProductController extends Controller
 
         $reservation = Reservation::findOrFail($id);
 
-        // 認可（オーナーチェック）を入れると安心
         if ($reservation->user_id !== auth()->id()) {
             abort(403);
         }
