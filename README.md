@@ -5,7 +5,7 @@
 ## Docker ビルド
 
 1. git clone git@github.com:lillian-angelina/eating-and-drinking.git
-2. cd ~/coachtech/laravel/eating-and-drinking
+2. cd ~/eating-and-drinking
 3. docker-compose up -d --build
 
 ## Laravel のセットアップ
@@ -31,6 +31,10 @@ DB_PASSWORD=laravel_pass
 2. php artisan cache:clear
 3. php artisan view:clear
 4. php artisan route:clear
+
+## 環境によってページが表示しない場合は以下を実行してください
+
+sudo chmod -R 777 src/*
 
 ## user のログイン用初期データ
 ### テストユーザー1
