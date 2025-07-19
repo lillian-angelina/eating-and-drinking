@@ -71,3 +71,9 @@
     cursor: pointer;
     transform: translate(290%, 0%);
 }
+
+.error {
+    text-align: center;
+    color: red;
+    margin: 0;
+}

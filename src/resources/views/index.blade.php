@@ -34,7 +34,7 @@
                                 @endif
                             @else
                                 <button type="button" class="btn-submit" style="color: #e9e9e9a8;"
-                                    onclick="alert('ログインしてください')">♥</button>
+                                    onclick="location.href='{{ route('login') }}'">♥</button>
                             @endauth
                         </form>
 

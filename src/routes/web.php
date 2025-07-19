@@ -12,7 +12,14 @@ Route::post('/auth/login', [AuthController::class, 'login']);
 Route::get('/auth/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/auth/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/thanks', function () {
+    return view('components.thanks');
+})->name('thanks');
+Route::get('/reservation', function () {
+    return view('components.reservation');
+})->name('reservation');
 
+Route::put('/reservations/{reservation}', [ProductController::class, 'update'])->name('reservations.update');
 Route::get('/restaurants/search', [ProductController::class, 'search'])->name('restaurants.search');
 Route::get('/restaurants/{restaurant}', [ProductController::class, 'show'])->name('restaurants.show');
 Route::post('/likes/{restaurant}', [LikeController::class, 'toggle'])->name('likes.toggle');

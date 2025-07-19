@@ -1,0 +1,36 @@
+.container {
+    max-width: none;
+    padding: 20px 0;
+    text-align: center;
+    width: 400px;
+    height: 250px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.container_reservation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-text {
+    margin-top: 15%;
+    font-size: 20px;
+    color: #333;
+}
+
+.button {
+    margin-top: 15px;
+}
+
+.button-home {
+    background-color: #2f62f9;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 5px 10px;
+}

@@ -10,11 +10,17 @@ class UserController extends Controller
     public function mypage()
     {
         $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'ログインしてください');
+        }
+
         $reservations = $user->reservations()->with('restaurant')->get();
         $favorites = $user->likes()->get();
 
         return view('users.mypage', compact('user', 'reservations', 'favorites'));
     }
+
 
     public function menu()
     {

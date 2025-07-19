@@ -16,7 +16,7 @@
                 @foreach($reservations as $reservation)
                     <div class="reservation-card">
                         <div class="reservation-header">
-                            <span>予約{{ $loop->iteration }}</span>
+                            <span><img src="{{ asset('images/tokei.png') }}" class="tokei-img">予約{{ $loop->iteration }}</span>
                             <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -25,7 +25,7 @@
                         </div>
                         <p><strong class="shop-name">Shop</strong>{{ $reservation->restaurant->name }}</p>
                         <p><strong class="shop-date">Date</strong>{{ $reservation->date }}</p>
-                        <p><strong class="shop-time">Time</strong>{{ $reservation->time }}</p>
+                        <p><strong class="shop-time">Time</strong>{{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}</p>
                         <p><strong class="shop-number">Number</strong>{{ $reservation->number }}人</p>
                     </div>
                 @endforeach

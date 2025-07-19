@@ -42,7 +42,7 @@ class ProductController extends Controller
             'number' => $validated['number'],
         ]);
 
-        return redirect()->route('mypage')->with('message', '予約を保存しました');
+        return redirect()->route('reservation')->with('message', '予約を保存しました');
     }
 
     public function show($id)
@@ -107,8 +107,28 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Update product logic here
+        $request->validate([
+            'date' => 'required|date',
+            'time' => 'required',
+            'number' => 'required|integer|min:1',
+        ]);
+
+        $reservation = Reservation::findOrFail($id);
+
+        // 認可（オーナーチェック）を入れると安心
+        if ($reservation->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $reservation->update([
+            'date' => $request->date,
+            'time' => $request->time,
+            'number' => $request->number,
+        ]);
+
+        return redirect()->back()->with('success', '予約内容を更新しました。');
     }
+
 
     public function destroy(Reservation $reservation)
     {

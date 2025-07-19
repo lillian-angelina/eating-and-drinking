@@ -70,3 +70,9 @@
     cursor: pointer;
     transform: translate(170%, 0%);
 }
+
+.error {
+    text-align: center;
+    color: red;
+    margin: 0;
+}

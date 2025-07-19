@@ -14,13 +14,21 @@
         <form method="POST" action="{{ route('login') }}" class="form">
             @csrf
             <div class="form-group">
-                <label for="email" class="form-group_label"><img src="{{ asset('images/mail.png') }}" class="mail-img"></label>
+                <label for="email" class="form-group_label"><img src="{{ asset('images/mail.png') }}"
+                        class="mail-img"></label>
                 <input type="email" name="email" id="email" class="form-group_input" placeholder="Email">
             </div>
+            @if ($errors->has('email'))
+                <div class="error">{{ $errors->first('email') }}</div>
+            @endif
             <div class="form-group">
-                <label for="password" class="form-group_label"><img src="{{ asset('images/key.png') }}" class="pass-img"></label>
+                <label for="password" class="form-group_label"><img src="{{ asset('images/key.png') }}"
+                        class="pass-img"></label>
                 <input type="password" name="password" id="password" class="form-group_input" placeholder="Password">
             </div>
+            @if ($errors->has('password'))
+                <div class="error">{{ $errors->first('password') }}</div>
+            @endif
             <button type="submit" class="form-group_button">ログイン</button>
         </form>
     </div>
